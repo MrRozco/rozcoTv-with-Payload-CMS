@@ -58,7 +58,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { layout } = page
 
   return (
-    <article >
+    <article className="flex flex-col gap-4">
 
       <RenderBlocks blocks={layout || []} />
     </article>

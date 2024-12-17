@@ -1,18 +1,20 @@
 import React, { Fragment } from 'react'
-import { HeroBlock } from '@/payload-types'
+import { HeroBlock, CarouselBlock } from '@/payload-types'
 import HeroComponent from './Hero/HeroComponent'
+import CarouselComponent from './Carousel/CarouselComponent'
 
 import type { Page } from '@/payload-types'
 
 
 const blockComponents: { [key: string]: React.FC<any> } = {
   hero: HeroComponent,
+  carousel: CarouselComponent,
   // add other block components here
 };
 
 
 export const RenderBlocks: React.FC<{
-  blocks: (HeroBlock | null | undefined)[];
+  blocks: (HeroBlock| CarouselBlock | null | undefined)[];
 }> = (props) => {
   const { blocks } = props
 

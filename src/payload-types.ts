@@ -121,7 +121,7 @@ export interface Page {
     };
     [k: string]: unknown;
   } | null;
-  layout?: HeroBlock[] | null;
+  layout?: (HeroBlock | CarouselBlock)[] | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -138,6 +138,19 @@ export interface HeroBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock".
+ */
+export interface CarouselBlock {
+  images: {
+    image: string | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carousel';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -249,6 +262,18 @@ export interface PagesSelect<T extends boolean = true> {
               heading?: T;
               description?: T;
               media?: T;
+              id?: T;
+              blockName?: T;
+            };
+        carousel?:
+          | T
+          | {
+              images?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

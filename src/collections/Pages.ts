@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { slugField } from '@/fields/slug'
 import { heroBlock } from '@/blocks/Hero/config';
+import { carouselBlock } from '@/blocks/Carousel/config';
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -23,7 +24,7 @@ export const Pages: CollectionConfig = {
     {
       name: 'layout',
       type: 'blocks',
-      blocks: [heroBlock]
+      blocks: [heroBlock, carouselBlock]
     },
     ...slugField(),
   ],
