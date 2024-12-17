@@ -1,9 +1,4 @@
-import React from 'react'
+import PageTemplate from './[slug]/page'
 
-function page() {
-  return (
-    <div className=' text-2xl text-red-600'></div>
-  )
-}
+export default PageTemplate
 
-export default page
