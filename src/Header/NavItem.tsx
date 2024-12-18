@@ -14,11 +14,12 @@ const NavItem: React.FC<NavItemProps> = ({ slug, label }) => {
     const isActive = pathname === `/${slug}`;
 
   return (
-    <>
-        <Link className={`text-white ${isActive ? 'bg-red-500 rounded-3xl' : ''} hover:bg-red-500 cursor-pointer px-5 py-3 rounded-3xl`} href={`/${slug}`}>
-            {label}
-        </Link>
-    </>
+    <Link href={`/${slug}`}>
+    <div className={`text-black ${isActive ? 'bg-red-500 ' : ''} hover:bg-red-500 cursor-pointer py-4 z-50  w-full`}>
+    {label}
+    </div>     
+    </Link>
+    
   )
 }
 
