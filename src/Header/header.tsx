@@ -24,7 +24,7 @@ function Header ({header}: Props) {
             </div>
             <div className='hidden md:block'>
                 <nav>
-                    <ul className='flex justify-between items-center text-xl gap-10 text-white'>
+                    <ul className='flex justify-between items-center text-xl gap-16 text-white'>
                         {header.items.map((item, index) => (
                             <li key={index}>
                                 <NavItem slug={item.page.slug} label={item.label} />
@@ -34,11 +34,11 @@ function Header ({header}: Props) {
                 </nav>
             </div>
             <div className='md:hidden z-50' >
-                <button className='' onClick={() => setIsOpen(!isOpen)}>
+                <button className=' text-3xl text-red-800 ' onClick={() => setIsOpen(!isOpen)}>
                   {isOpen ? 'X' : '☰'}
                 </button>
                 {isOpen && (
-                    <div className=' absolute text-center top-full left-0 w-full flex border-b-4 border-red-900 z-50'>
+                    <div className=' absolute text-center top-full left-0 w-full flex border-b-4 border-red-900 z-50 '>
                     <nav className='w-full'>
                       <ul className='flex flex-col text-xl  text-black bg-white w-full z-50 '>
                         {header.items.map((item, index) => (

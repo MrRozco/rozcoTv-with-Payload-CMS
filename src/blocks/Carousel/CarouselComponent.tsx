@@ -16,16 +16,20 @@ const isMedia = (media: any): media is Media => {
   return media && typeof media !== "number" && "url" in media;
 };
 
-const CarouselComponent: React.FC<Props> = ({ images }) => {
+const CarouselComponent: React.FC<Props> = ({ heading, description, images }) => {
 
   return (
-   <div className=' '>
+   <div className=' py-[2%]'>
+    <div className=" mb-5">
+      <h1 className='text-3xl text-red-800 font-bold text-center'>{heading}</h1>
+      <p className='text-center text-lg text-white'>{description}</p>
+    </div>
     <Swiper
-        className= 'w-4/5 m-auto'
+        className= 'mySwiper w-[80%] h-[500px] mx-auto'
         effect={'coverflow'}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={3}
+        slidesPerView={'auto'}
         loop={true}
         coverflowEffect={{
           rotate: 50,
@@ -42,12 +46,12 @@ const CarouselComponent: React.FC<Props> = ({ images }) => {
         modules={[ Autoplay, EffectCoverflow, Navigation]}
 
       >{images.map((item, index) => (
-        <SwiperSlide className="w-1/5 h-[300px]" key={index}>
+      <SwiperSlide className=" bg-center bg-cover !w-auto " key={index}>
           {isMedia(item.image) && (
               <img
                 src={item.image.url ?? ''}
                 alt={item.image.alt ?? `Slide ${index + 1}`}
-                className="object-cover"
+                className="object-cover border-4 border-red-900 w-[300px] block"
               />
             )}
         </SwiperSlide>

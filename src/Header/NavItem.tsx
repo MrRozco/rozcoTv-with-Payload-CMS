@@ -2,24 +2,23 @@
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import './NavItem.css'
 
 type NavItemProps = {
-    slug: string;
-    label: string;
-  };
+  slug: string;
+  label: string;
+};
 
 const NavItem: React.FC<NavItemProps> = ({ slug, label }) => {
-
-    const pathname = usePathname()
-    const isActive = pathname === `/${slug}`;
+  const pathname = usePathname()
+  const isActive = pathname === `/${slug}`;
 
   return (
     <Link href={`/${slug}`}>
-    <div className={`text-black ${isActive ? 'bg-red-500 ' : ''} hover:bg-red-500 cursor-pointer py-4 z-50  w-full`}>
-    {label}
-    </div>     
+      <div className={`text-black font-bold ${isActive ? 'underline-thick' : ''} cursor-pointer py-4 z-50 w-full hover:underline-thick text-center`}>
+        {label}
+      </div>
     </Link>
-    
   )
 }
 

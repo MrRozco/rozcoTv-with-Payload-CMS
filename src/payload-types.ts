@@ -121,7 +121,7 @@ export interface Page {
     };
     [k: string]: unknown;
   } | null;
-  layout?: (HeroBlock | CarouselBlock)[] | null;
+  layout?: (HeroBlock | CarouselBlock | VideoBlock | CTABlock | ThreeCardsBlock)[] | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -134,6 +134,10 @@ export interface Page {
 export interface HeroBlock {
   heading: string;
   description?: string | null;
+  button?: {
+    text?: string | null;
+    url?: string | null;
+  };
   media: string | Media;
   id?: string | null;
   blockName?: string | null;
@@ -144,6 +148,8 @@ export interface HeroBlock {
  * via the `definition` "CarouselBlock".
  */
 export interface CarouselBlock {
+  heading: string;
+  description?: string | null;
   images: {
     image: string | Media;
     id?: string | null;
@@ -151,6 +157,51 @@ export interface CarouselBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'carousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoBlock".
+ */
+export interface VideoBlock {
+  heading: string;
+  description: string;
+  media: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'video';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTABlock".
+ */
+export interface CTABlock {
+  heading: string;
+  description?: string | null;
+  button: {
+    text: string;
+    url: string;
+  };
+  media: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ThreeCardsBlock".
+ */
+export interface ThreeCardsBlock {
+  cards?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        image?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'three-cards';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -261,6 +312,12 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               heading?: T;
               description?: T;
+              button?:
+                | T
+                | {
+                    text?: T;
+                    url?: T;
+                  };
               media?: T;
               id?: T;
               blockName?: T;
@@ -268,9 +325,49 @@ export interface PagesSelect<T extends boolean = true> {
         carousel?:
           | T
           | {
+              heading?: T;
+              description?: T;
               images?:
                 | T
                 | {
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        video?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              media?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              button?:
+                | T
+                | {
+                    text?: T;
+                    url?: T;
+                  };
+              media?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'three-cards'?:
+          | T
+          | {
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
                     image?: T;
                     id?: T;
                   };

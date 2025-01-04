@@ -4,6 +4,16 @@ export const carouselBlock: Block = {
   slug: 'carousel',
   fields: [
     {
+        name: 'heading',
+        type: 'text',
+        required: true,
+    },
+    {
+        name: 'description',
+        type: 'textarea',
+        required: false
+    },
+    {
         name: 'images',
         type: 'array',
         required: true,

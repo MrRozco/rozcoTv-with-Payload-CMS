@@ -1,7 +1,7 @@
-import type { Block } from 'payload'
+import { Block } from 'payload'
 
-export const heroBlock: Block = {
-  slug: 'hero',
+export const CTA: Block = {
+  slug: 'cta',
   fields: [
     {
         name: 'heading',
@@ -20,12 +20,12 @@ export const heroBlock: Block = {
         {
           name: 'text',
           type: 'text',
-          required: false,
+          required: true,
         },
         {
           name: 'url',
           type: 'text',
-          required: false,
+          required: true,
         },
       ],
     },
@@ -37,5 +37,5 @@ export const heroBlock: Block = {
     }
   ],
 
-  interfaceName: 'HeroBlock'
+  interfaceName: 'CTABlock'
 }

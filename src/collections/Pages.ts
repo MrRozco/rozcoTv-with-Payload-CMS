@@ -2,6 +2,10 @@ import type { CollectionConfig } from 'payload'
 import { slugField } from '@/fields/slug'
 import { heroBlock } from '@/blocks/Hero/config';
 import { carouselBlock } from '@/blocks/Carousel/config';
+import { videoBlock } from '@/blocks/Video/config';
+import { CTA } from '@/blocks/CTA/config';
+import { ThreeCardsBlock } from '@/blocks/ThreeCards/config';
+
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -24,7 +28,7 @@ export const Pages: CollectionConfig = {
     {
       name: 'layout',
       type: 'blocks',
-      blocks: [heroBlock, carouselBlock]
+      blocks: [heroBlock, carouselBlock, videoBlock, CTA, ThreeCardsBlock]
     },
     ...slugField(),
   ],

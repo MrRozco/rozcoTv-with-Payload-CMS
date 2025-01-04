@@ -1,0 +1,13 @@
+.underline-thick {
+    text-decoration: underline;
+    text-decoration-thickness: 4px; /* Adjust the thickness as needed */
+    text-decoration-color: #7f1d1d ; /* Adjust the color as needed */
+    text-underline-offset: 4px; /* Adjust the offset as needed */
+  }
+
+  .hover\:underline-thick:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 4px; /* Adjust the thickness as needed */
+    text-decoration-color: #7f1d1d ; /* Adjust the color as needed */
+    text-underline-offset: 4px; /* Adjust the offset as needed */
+  }
