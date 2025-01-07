@@ -5,6 +5,7 @@ import { carouselBlock } from '@/blocks/Carousel/config';
 import { videoBlock } from '@/blocks/Video/config';
 import { CTA } from '@/blocks/CTA/config';
 import { ThreeCardsBlock } from '@/blocks/ThreeCards/config';
+import { TextImgBlock } from '@/blocks/TextAndImg/config';
 
 
 export const Pages: CollectionConfig = {
@@ -28,7 +29,7 @@ export const Pages: CollectionConfig = {
     {
       name: 'layout',
       type: 'blocks',
-      blocks: [heroBlock, carouselBlock, videoBlock, CTA, ThreeCardsBlock]
+      blocks: [heroBlock, carouselBlock, videoBlock, CTA, ThreeCardsBlock, TextImgBlock],
     },
     ...slugField(),
   ],

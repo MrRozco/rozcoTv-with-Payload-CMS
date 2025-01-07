@@ -27,7 +27,7 @@ const CTAComponent: React.FC<Props> = ({ heading, description, media, button }) 
         </div>
         <div className=' w-full md:w-1/2 '>
             {isMedia(media) && (
-              <Image className='rounded-md border-4 border-white' src={media.url} alt={heading} width={500} height={400} />
+              <Image className='rounded-md border-4 border-white' src={media.url ?? ''} alt={heading} width={500} height={400} />
             )}
         </div>
     </div>

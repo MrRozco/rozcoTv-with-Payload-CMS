@@ -23,7 +23,7 @@ const HeroComponent: React.FC<Props> = ({ heading, description, media, button })
           color: '#fff',
         }}
       >
-        <div className=" block md:hidden absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+        <div className=" block md:hidden absolute inset-0 bg-gradient-to-r from-black/80 to-black/20"></div>
         <div className="relative z-10 w-full px-[5%] lg:px-[10%] xl:px-[15%] py-12 text-start">
           <h1 className="text-7xl text-white">{heading}</h1>
           {description && <p className="text-white text-2xl mb-5">{description}</p>}

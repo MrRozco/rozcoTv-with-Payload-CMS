@@ -32,9 +32,11 @@ export interface Config {
   };
   globals: {
     nav: Nav;
+    footer: Footer;
   };
   globalsSelect: {
     nav: NavSelect<false> | NavSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
   };
   locale: null;
   user: User & {
@@ -121,7 +123,7 @@ export interface Page {
     };
     [k: string]: unknown;
   } | null;
-  layout?: (HeroBlock | CarouselBlock | VideoBlock | CTABlock | ThreeCardsBlock)[] | null;
+  layout?: (HeroBlock | CarouselBlock | VideoBlock | CTABlock | ThreeCardsBlock | TextImgBlock)[] | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -202,6 +204,20 @@ export interface ThreeCardsBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'three-cards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextImgBlock".
+ */
+export interface TextImgBlock {
+  heading: string;
+  description?: string | null;
+  firstImage: string | Media;
+  secondImage: string | Media;
+  imageAlignment: 'left' | 'right';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'text-and-img';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -374,6 +390,17 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        'text-and-img'?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              firstImage?: T;
+              secondImage?: T;
+              imageAlignment?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   slug?: T;
   slugLock?: T;
@@ -429,9 +456,41 @@ export interface Nav {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  logo: string | Media;
+  items: {
+    page: string | Page;
+    label: string;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "nav_select".
  */
 export interface NavSelect<T extends boolean = true> {
+  logo?: T;
+  items?:
+    | T
+    | {
+        page?: T;
+        label?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
   logo?: T;
   items?:
     | T

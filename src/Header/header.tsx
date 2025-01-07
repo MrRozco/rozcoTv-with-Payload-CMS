@@ -37,8 +37,8 @@ function Header ({header}: Props) {
                 <button className=' text-3xl text-red-800 ' onClick={() => setIsOpen(!isOpen)}>
                   {isOpen ? 'X' : '☰'}
                 </button>
-                {isOpen && (
-                    <div className=' absolute text-center top-full left-0 w-full flex border-b-4 border-red-900 z-50 '>
+                <div className={`absolute top-full left-0 w-full flex border-b-4 border-red-900 z-50 transition-all duration-300 ease-in-out 
+                               ${ isOpen ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0 overflow-hidden'}`} >
                     <nav className='w-full'>
                       <ul className='flex flex-col text-xl  text-black bg-white w-full z-50 '>
                         {header.items.map((item, index) => (
@@ -49,7 +49,6 @@ function Header ({header}: Props) {
                       </ul>
                     </nav>
                   </div>
-                )}
             </div>
         </div>
     )
