@@ -34,7 +34,7 @@ export default buildConfig({
           async ({ doc, operation }) => {
             if (operation === 'create' || operation === 'update') {
               // Trigger Vercel deploy webhook after content is updated
-              await fetch('https://api.vercel.com/v1/integrations/deploy/rozcotvonline.vercel.app', {
+              await fetch('https://api.vercel.com/v1/integrations/deploy/prj_fwcWzvoVc47d4RhdyEwDfLJbK8wX/RZRQ4z2GMz', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
