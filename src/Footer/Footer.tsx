@@ -10,22 +10,26 @@ const isMedia = (media: any): media is Media => {
     return media && typeof media !== 'string' && 'url' in media
   }
 
+const isPage = (page: any): page is Page => {
+    return page && typeof page !== 'string' && 'slug' in page
+}
+
 const FooterComponent = ({footer}: Props) => {
     return (
         <footer className='bg-black text-white px-[10%] lg:px-[20%]'>
             <div className='flex justify-between items-center h-[20vh]'>
                 <div>
                     <Link href='/'>
-                    {isMedia(footer.logo) && (
-                            <Image src={footer.logo.url} alt={footer.logo.alt} width={100} height={100} className='rounded-full' />
-                        )}
+                    {isMedia(footer.logo) && footer.logo.url ? (
+                            <Image src={footer.logo.url} alt={footer.logo.alt || 'Logo'} width={100} height={100} className='rounded-full' />
+                        ) : null}
                     </Link>
                 </div>
                 <div>
                     <ul className='flex justify-between items-center gap-[80px] text-lg font-bold'>
                         {footer.items.map((item, index) => (
                             <li key={index}>
-                                <Link href={item.page.slug}>
+                                <Link href={isPage(item.page) && item.page.slug ? item.page.slug : '#'}>
                                     {item.label}
                                 </Link>
                             </li>
