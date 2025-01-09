@@ -19,7 +19,13 @@ function Header ({header}: Props) {
         <div className=' sticky top-0 flex justify-between items-center py-4 px-[10%] lg:px-[20%] bg-white border-b-4 border-red-900 z-50'>
             <div>
                 <Link href='/'>
-                    <Image src={header.logo.url} alt={header.logo.alt} width={100} height={100} className='rounded-full' />
+                    {typeof header.logo === 'string' ? (
+                        <Image src={header.logo} alt="Logo" width={100} height={100} className='rounded-full' />
+                    ) : (
+                        header.logo.url && (
+                            <Image src={header.logo.url} alt={header.logo.alt || 'Logo'} width={100} height={100} className='rounded-full' />
+                        )
+                    )}
                 </Link>
             </div>
             <div className='hidden md:block'>
@@ -27,7 +33,7 @@ function Header ({header}: Props) {
                     <ul className='flex justify-between items-center text-xl gap-16 text-white'>
                         {header.items.map((item, index) => (
                             <li key={index}>
-                                <NavItem slug={item.page.slug} label={item.label} />
+                                {typeof item.page !== 'string' && item.page.slug && <NavItem slug={item.page.slug} label={item.label} />}
                             </li>
                         ))}
                     </ul>
@@ -43,7 +49,7 @@ function Header ({header}: Props) {
                       <ul className='flex flex-col text-xl  text-black bg-white w-full z-50 '>
                         {header.items.map((item, index) => (
                           <li className='w-full' key={index}>
-                            <NavItem slug={item.page.slug} label={item.label} />
+                            {typeof item.page !== 'string' && item.page.slug && <NavItem slug={item.page.slug} label={item.label} />}
                           </li>
                         ))}
                       </ul>
