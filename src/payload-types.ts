@@ -123,7 +123,7 @@ export interface Page {
     };
     [k: string]: unknown;
   } | null;
-  layout?: (HeroBlock | CarouselBlock | VideoBlock | CTABlock | ThreeCardsBlock | TextImgBlock)[] | null;
+  layout?: (HeroBlock | CarouselBlock | VideoBlock | CTABlock | ThreeCardsBlock | TextImgBlock | ContactBlock)[] | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -218,6 +218,22 @@ export interface TextImgBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'text-and-img';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactBlock".
+ */
+export interface ContactBlock {
+  heading: string;
+  description?: string | null;
+  button?: {
+    text?: string | null;
+    url?: string | null;
+  };
+  media?: (string | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -398,6 +414,21 @@ export interface PagesSelect<T extends boolean = true> {
               firstImage?: T;
               secondImage?: T;
               imageAlignment?: T;
+              id?: T;
+              blockName?: T;
+            };
+        contact?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              button?:
+                | T
+                | {
+                    text?: T;
+                    url?: T;
+                  };
+              media?: T;
               id?: T;
               blockName?: T;
             };

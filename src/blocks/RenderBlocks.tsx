@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react'
-import { HeroBlock, CarouselBlock, VideoBlock, CTABlock, ThreeCardsBlock, TextImgBlock } from '@/payload-types'
+import { HeroBlock, CarouselBlock, VideoBlock, CTABlock, ThreeCardsBlock, TextImgBlock, ContactBlock } from '@/payload-types'
 import HeroComponent from './Hero/HeroComponent'
 import CarouselComponent from './Carousel/CarouselComponent'
 import VideoComponent from './Video/VideoComponent'
 import CTAComponent from './CTA/CTAComponent'
 import ThreeCardsComponent from './ThreeCards/ThreeCardsComponent'
 import TextAndImgComponent from './TextAndImg/TextAndImg'
-
+import ContactComponent from './Contact/ContactComponent'
 
 
 const blockComponents: { [key: string]: React.FC<any> } = {
@@ -15,14 +15,15 @@ const blockComponents: { [key: string]: React.FC<any> } = {
   video: VideoComponent,
   cta: CTAComponent,
   'three-cards': ThreeCardsComponent,
-  'text-and-img': TextAndImgComponent
+  'text-and-img': TextAndImgComponent,
+  contact: ContactComponent
 
   // add other block components here
 };
 
 
 export const RenderBlocks: React.FC<{
-  blocks: (HeroBlock| CarouselBlock | VideoBlock | CTABlock | ThreeCardsBlock | TextImgBlock | null | undefined)[];
+  blocks: (HeroBlock| CarouselBlock | VideoBlock | CTABlock | ThreeCardsBlock | TextImgBlock | ContactBlock | null | undefined)[];
 }> = (props) => {
   const { blocks } = props
 
