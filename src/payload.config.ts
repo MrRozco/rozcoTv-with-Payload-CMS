@@ -24,7 +24,29 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages ],
+  collections: [
+    Users,
+    Media,
+    {
+      ...Pages, // Spread existing Pages collection config
+      hooks: {
+        afterChange: [
+          async ({ doc, operation }) => {
+            if (operation === 'create' || operation === 'update') {
+              // Trigger Vercel deploy webhook after content is updated
+              await fetch('https://api.vercel.com/v1/integrations/deploy/rozcotvonline.vercel.app', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
+              console.log('Triggered Vercel deploy webhook for changes to page:', doc);
+            }
+          },
+        ],
+      },
+    },
+  ],
   globals : [Nav, Footer],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
