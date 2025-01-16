@@ -10,6 +10,9 @@ type Props = {
 }
 
 
+const awsUrl = 'https://rozcotvbucket.s3.us-east-2.amazonaws.com/'
+
+
 function Header ({header}: Props) {
 
     const [isOpen, setIsOpen] = useState(false)
@@ -23,7 +26,7 @@ function Header ({header}: Props) {
                         <Image src={header.logo} alt="Logo" width={100} height={100} className='rounded-full' />
                     ) : (
                         header.logo.url && (
-                            <Image src={header.logo.url} alt={header.logo.alt || 'Logo'} width={100} height={100} className='rounded-full' />
+                            <Image src={awsUrl + header.logo.filename} alt={header.logo.alt || 'Logo'} width={100} height={100} className='rounded-full' />
                         )
                     )}
                 </Link>

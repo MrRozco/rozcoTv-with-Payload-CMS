@@ -14,6 +14,8 @@ const isPage = (page: any): page is Page => {
     return page && typeof page !== 'string' && 'slug' in page
 }
 
+const awsUrl = 'https://rozcotvbucket.s3.us-east-2.amazonaws.com/'
+
 const FooterComponent = ({footer}: Props) => {
     return (
         <footer className='bg-black text-white px-[10%] lg:px-[20%]'>
@@ -21,7 +23,7 @@ const FooterComponent = ({footer}: Props) => {
                 <div>
                     <Link href='/'>
                     {isMedia(footer.logo) && footer.logo.url ? (
-                            <Image src={footer.logo.url} alt={footer.logo.alt || 'Logo'} width={100} height={100} className='rounded-full' />
+                            <Image src={awsUrl + footer.logo.filename} alt={footer.logo.alt || 'Logo'} width={100} height={100} className='rounded-full' />
                         ) : null}
                     </Link>
                 </div>
