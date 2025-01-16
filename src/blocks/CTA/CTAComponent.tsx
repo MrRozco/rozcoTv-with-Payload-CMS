@@ -11,6 +11,8 @@ const isMedia = (media: any): media is Media => {
   return media && typeof media !== 'number' && 'url' in media
 }
 
+const awsUrl = 'https://rozcotvbucket.s3.us-east-2.amazonaws.com/'
+
 const CTAComponent: React.FC<Props> = ({ heading, description, media, button }) => {
   return (
     <div className=" w-full h-auto py-[2%] gap-2 flex flex-col md:flex-row px-[10%] lg:px-[15%] justify-center items-center bg-gradient-to-r from-black via-red-950 to-black">
@@ -27,7 +29,7 @@ const CTAComponent: React.FC<Props> = ({ heading, description, media, button }) 
         </div>
         <div className=' w-full md:w-1/2 '>
             {isMedia(media) && (
-              <Image className='rounded-md border-4 border-white' src={media.url ?? ''} alt={heading} width={500} height={400} />
+              <Image className='rounded-md border-4 border-white' src={awsUrl + media.filename} alt={heading} width={500} height={400} />
             )}
         </div>
     </div>

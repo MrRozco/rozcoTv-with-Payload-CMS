@@ -1,21 +1,26 @@
-// storage-adapter-import-placeholder
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import path from 'path'
-import { buildConfig } from 'payload'
-import { fileURLToPath } from 'url'
-import sharp from 'sharp'
+import { mongooseAdapter } from '@payloadcms/db-mongodb';
+import AWS from 'aws-sdk';
+import { payloadCloudPlugin } from '@payloadcms/payload-cloud';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import path from 'path';
+import { buildConfig } from 'payload';
+import { fileURLToPath } from 'url';
+import sharp from 'sharp';
 
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
-import { Pages } from './collections/Pages'
-import { Nav } from './Header'
-import { Footer } from './Footer'
+import { Users } from './collections/Users';
+import { Media } from './collections/Media';
+import { Pages } from './collections/Pages';
+import { Nav } from './Header';
+import { Footer } from './Footer';
 
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
 
 export default buildConfig({
   admin: {
@@ -26,7 +31,30 @@ export default buildConfig({
   },
   collections: [
     Users,
-    Media,
+    {
+      ...Media,
+      hooks: {
+        beforeChange: [
+          async ({ data, req }) => {
+            if (req.file) {
+              const file = req.file;
+              const params = {
+                Bucket: process.env.AWS_S3_BUCKET,
+                Key: file.name,
+                Body: file.data,
+                ContentType: file.mimetype,
+              };
+
+              if (!process.env.AWS_S3_BUCKET) {
+                throw new Error('AWS_S3_BUCKET environment variable is not set');
+              }
+              const uploadResult = await s3.upload({ ...params, Bucket: process.env.AWS_S3_BUCKET }).promise();
+              data.url = uploadResult.Location;
+            }
+          },
+        ],
+      },
+    },
     {
       ...Pages, // Spread existing Pages collection config
       hooks: {
@@ -47,7 +75,7 @@ export default buildConfig({
       },
     },
   ],
-  globals : [Nav, Footer],
+  globals: [Nav, Footer],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -56,9 +84,4 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  sharp,
-  plugins: [
-    payloadCloudPlugin(),
-    // storage-adapter-placeholder
-  ],
-})
+});
