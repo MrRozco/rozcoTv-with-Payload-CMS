@@ -9,6 +9,8 @@ const isMedia = (media: any): media is Media => {
   return media && typeof media !== 'number' && 'url' in media
 }
 
+const awsUrl = 'https://rozcotvbucket.s3.us-east-2.amazonaws.com/'
+
 const VideoComponent: React.FC<Props> = ({ heading, description, media }) => {
   return (
     <div className="w-full bg-black py-10 ">
@@ -20,7 +22,7 @@ const VideoComponent: React.FC<Props> = ({ heading, description, media }) => {
             <div className="lg:w-1/2 w-full aspect-w-16 aspect-h-9 lg:aspect-h-5 border-4 border-white flex items-center justify-center rounded-md">
                 {isMedia(media) && (
                 <video
-                    src={media.url ?? ''}
+                    src={awsUrl + media.filename}
                     autoPlay
                     controls
                     loop

@@ -10,13 +10,15 @@ const isMedia = (media: any): media is Media => {
   return media && typeof media !== 'number' && 'url' in media
 }
 
+const awsUrl = 'https://rozcotvbucket.s3.us-east-2.amazonaws.com/'
+
 const HeroComponent: React.FC<Props> = ({ heading, description, media, button }) => {
   return (
     <div className="w-full relative z-0">
       <div
         className="hero w-full h-[60vh] flex flex-col justify-center items-start"
         style={{
-          backgroundImage: isMedia(media) ? `url(${media.url})` : 'none',
+          backgroundImage: isMedia(media) ? `url(${awsUrl + media.filename})` : 'none',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',

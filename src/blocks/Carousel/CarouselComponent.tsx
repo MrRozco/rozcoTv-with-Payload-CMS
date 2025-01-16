@@ -16,6 +16,8 @@ const isMedia = (media: any): media is Media => {
   return media && typeof media !== "number" && "url" in media;
 };
 
+const awsUrl = 'https://rozcotvbucket.s3.us-east-2.amazonaws.com/'
+
 const CarouselComponent: React.FC<Props> = ({ heading, description, images }) => {
 
   return (
@@ -49,7 +51,7 @@ const CarouselComponent: React.FC<Props> = ({ heading, description, images }) =>
       <SwiperSlide className=" bg-center bg-cover !w-auto " key={index}>
           {isMedia(item.image) && (
               <img
-                src={item.image.url ?? ''}
+                src={awsUrl + item.image.filename}
                 alt={item.image.alt ?? `Slide ${index + 1}`}
                 className="object-cover border-4 border-red-900 w-[300px] block"
               />
